@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a0f1e;
+  --navy2:#111827;
+  --cyan:#00e5ff;
+  --cyan2:#00bcd4;
+  --white:#f0f4ff;
+  --muted:#8892aa;
+  --card:#151d2e;
+  --border:rgba(0,229,255,0.15);
+}
+body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden}
+h1,h2,h3,.brand{font-family:'Syne',sans-serif}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:0.5px solid var(--border);position:sticky;top:0;background:rgba(10,15,30,0.95);backdrop-filter:blur(8px);z-index:100}
+.logo{font-size:1.1rem;font-weight:800;color:var(--cyan);letter-spacing:0.05em}
+.logo span{color:var(--white)}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color 0.2s}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{background:var(--cyan);color:var(--navy);padding:0.5rem 1.2rem;border-radius:6px;font-size:14px;font-weight:500;text-decoration:none;font-family:'Syne',sans-serif;transition:opacity 0.2s}
+.nav-cta:hover{opacity:0.85}
+
+.hero{padding:5rem 2rem 4rem;max-width:960px;margin:0 auto;text-align:center}
+.badge{display:inline-block;background:rgba(0,229,255,0.1);border:0.5px solid var(--border);color:var(--cyan);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:0.35rem 1rem;border-radius:20px;margin-bottom:1.5rem;font-family:'Syne',sans-serif}
+.hero h1{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:800;line-height:1.1;margin-bottom:1.2rem}
+.hero h1 span{color:var(--cyan)}
+.hero p{color:var(--muted);font-size:1.1rem;max-width:600px;margin:0 auto 2rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--cyan);color:var(--navy);padding:0.85rem 2rem;border-radius:8px;text-decoration:none;font-weight:700;font-family:'Syne',sans-serif;font-size:15px;transition:opacity 0.2s}
+.btn-primary:hover{opacity:0.85}
+.btn-secondary{border:0.5px solid var(--border);color:var(--white);padding:0.85rem 2rem;border-radius:8px;text-decoration:none;font-size:15px;transition:border-color 0.2s}
+.btn-secondary:hover{border-color:var(--cyan)}
+
+.section{padding:4rem 2rem;max-width:960px;margin:0 auto}
+.section-label{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);font-family:'Syne',sans-serif;margin-bottom:0.75rem}
+.section h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin-bottom:1rem}
+.section h2 span{color:var(--cyan)}
+.section-sub{color:var(--muted);max-width:520px;margin-bottom:2.5rem}
+
+.stations{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.station-card{background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:1.5rem;transition:border-color 0.2s}
+.station-card:hover{border-color:var(--cyan)}
+.station-num{font-size:11px;color:var(--cyan);letter-spacing:0.1em;font-family:'Syne',sans-serif;margin-bottom:0.5rem}
+.station-card h3{font-size:1rem;font-weight:700;margin-bottom:0.4rem}
+.station-card p{font-size:13px;color:var(--muted)}
+
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2rem}
+.price-card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:2rem}
+.price-card.featured{border-color:var(--cyan);position:relative}
+.featured-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--cyan);color:var(--navy);font-size:11px;font-family:'Syne',sans-serif;font-weight:700;padding:0.25rem 1rem;border-radius:20px;white-space:nowrap}
+.price-card h3{font-size:1.1rem;font-weight:700;margin-bottom:0.5rem}
+.price-card .price{font-size:2.2rem;font-weight:800;color:var(--cyan);font-family:'Syne',sans-serif;margin:1rem 0 0.25rem}
+.price-card .price-note{font-size:13px;color:var(--muted);margin-bottom:1.5rem}
+.price-card ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.5rem}
+.price-card ul li{font-size:14px;color:var(--muted);display:flex;gap:0.5rem;align-items:flex-start}
+.price-card ul li::before{content:"✓";color:var(--cyan);font-size:13px;margin-top:2px;flex-shrink:0}
+.card-btn{display:block;text-align:center;padding:0.75rem;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;text-decoration:none;transition:opacity 0.2s}
+.card-btn-outline{border:0.5px solid var(--border);color:var(--white)}
+.card-btn-outline:hover{border-color:var(--cyan);color:var(--cyan)}
+.card-btn-solid{background:var(--cyan);color:var(--navy)}
+.card-btn-solid:hover{opacity:0.85}
+
+.audit-box{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:2.5rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap;margin-top:2rem}
+.audit-dot{width:12px;height:12px;border-radius:50%;background:#ff4444;flex-shrink:0;margin-top:6px;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.audit-box h3{font-size:1.2rem;font-weight:700;margin-bottom:0.5rem}
+.audit-box p{color:var(--muted);font-size:14px;max-width:460px}
+
+footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:13px}
+footer a{color:var(--cyan);text-decoration:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">First Class<span> Tutor</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Stations</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Audit</a></li>
+  </ul>
+  <a href="https://wa.me/18683817846" class="nav-cta">Enroll Now</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">Syllabus 2026 Ready</div>
+  <h1>Stop the guesswork.<br><span>Pass CSEC Math.</span></h1>
+  <p>The Strategic 6 Blueprint maps the entire 2026 syllabus into 6 stations — targeting every mark-leak before it happens.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/18683817846" class="btn-primary">Get Free Audit</a>
+    <a href="https://acesse.one/90j1J" class="btn-secondary">Watch the Blueprint Video</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">The Strategic 6</div>
+  <h2>Every station. <span>Every mark.</span></h2>
+  <p class="section-sub">We've distilled the 2026 CSEC Math syllabus into 6 high-impact stations where most students lose marks.</p>
+  <div class="stations">
+    <div class="station-card">
+      <div class="station-num">Station 01</div>
+      <h3>Consumer Arithmetic</h3>
+      <p>Stop losing marks to intermediate rounding errors.</p>
+    </div>
+    <div class="station-card">
+      <div class="station-num">Station 02</div>
+      <h3>Algebra Mastery</h3>
+      <p>Master the negative bracket signs that sink 60% of students.</p>
+    </div>
+    <div class="station-card">
+      <div class="station-num">Station 03</div>
+      <h3>Functions & Relations</h3>
+      <p>Build fluency with mappings, domain, range and graphs.</p>
+    </div>
+    <div class="station-card">
+      <div class="station-num">Station 04</div>
+      <h3>Statistics Precision</h3>
+      <p>Ace data handling, measures of central tendency, and more.</p>
+    </div>
+    <div class="station-card">
+      <div class="station-num">Station 05</div>
+      <h3>Investigation Patterns</h3>
+      <p>Crack the n-th term code without the guessing game.</p>
+    </div>
+    <div class="station-card">
+      <div class="station-num">Station 06</div>
+      <h3>Advanced Graphs</h3>
+      <p>Navigate Speed-Time area calculations like a pro.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Pricing</div>
+  <h2>Choose your <span>Sprint.</span></h2>
+  <p class="section-sub">Both options built for the 2026 exam. Pick the level of support your child needs.</p>
+  <div class="pricing">
+    <div class="price-card">
+      <h3>Self-Paced Sprint</h3>
+      <div class="price">$300 <span style="font-size:1rem;color:var(--muted)">TTD</span></div>
+      <div class="price-note">One-time payment · Google Classroom</div>
+      <ul>
+        <li>All 6 Station lessons</li>
+        <li>Vault practice problems</li>
+        <li>2026 predictive questions</li>
+        <li>Learn at your own pace</li>
+      </ul>
+      <a href="https://wa.me/18683817846" class="card-btn card-btn-outline">Get Started</a>
+    </div>
+    <div class="price-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <h3>Guided Sprint</h3>
+      <div class="price">$50 <span style="font-size:1rem;color:var(--muted)">TTD/hr</span></div>
+      <div class="price-note">Tutoring add-on · Private 1-on-1</div>
+      <ul>
+        <li>Everything in Self-Paced</li>
+        <li>Live 1-on-1 tutoring sessions</li>
+        <li>Personal exam strategy</li>
+        <li>Exam-ready guarantee</li>
+      </ul>
+      <a href="https://wa.me/18683817846" class="card-btn card-btn-solid">Enroll on WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Free Offer</div>
+  <h2>Get your <span>Mark-Leak Audit.</span></h2>
+  <div class="audit-box">
+    <div class="audit-dot"></div>
+    <div>
+      <h3>Limited spots for March Audit</h3>
+      <p>Snap a photo of your child's recent Math working and our specialists will identify exactly where marks are slipping — completely free.</p>
+    </div>
+    <a href="https://wa.me/18683817846" class="btn-primary" style="flex-shrink:0">Send Audit Request</a>
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom:0.5rem">First Class Tutor · Trinidad & Tobago</p>
+  <p><a href="https://wa.me/18683817846">WhatsApp: +1 868-381-7846</a> · #csecmath2026 #strategic6 #TrinidadEducation</p>
+</footer>
+
+</body>
+</html>
